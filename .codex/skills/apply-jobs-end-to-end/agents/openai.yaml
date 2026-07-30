@@ -1,0 +1,4 @@
+interface:
+  display_name: "End-to-End Job Applications"
+  short_description: "Search, tailor, submit, and audit job applications"
+  default_prompt: "Use $apply-jobs-end-to-end to find, tailor, submit, and audit eligible job applications."

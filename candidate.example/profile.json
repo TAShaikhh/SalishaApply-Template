@@ -1,0 +1,51 @@
+{
+  "identity": {
+    "fullName": "YOUR_FULL_NAME",
+    "email": "YOUR_EMAIL",
+    "phone": "YOUR_PHONE",
+    "location": "YOUR_CITY_REGION_COUNTRY",
+    "linkedin": "YOUR_LINKEDIN_URL",
+    "portfolio": "YOUR_PORTFOLIO_URL"
+  },
+  "eligibility": {
+    "authorizedToWork": true,
+    "needsSponsorship": false,
+    "countries": [
+      "YOUR_COUNTRY"
+    ],
+    "currentlyEnrolled": true,
+    "graduationDate": "YYYY-MM"
+  },
+  "search": {
+    "keywords": [
+      "intern",
+      "internship"
+    ],
+    "targetTitles": [
+      "Software Engineer Intern",
+      "Software Developer Intern",
+      "Product Intern",
+      "Technical Product Management Intern"
+    ],
+    "locations": [
+      "YOUR_PREFERRED_LOCATION",
+      "Remote"
+    ],
+    "maxPostingAgeHours": 24,
+    "internshipOnly": true,
+    "excludeReposts": true,
+    "excludedCompanies": []
+  },
+  "defaults": {
+    "previouslyEmployedByCompany": false,
+    "acceptRequiredPrivacyTerms": true,
+    "acceptOptionalMarketing": false,
+    "voluntarySelfIdentification": "Prefer not to answer"
+  },
+  "answers": {
+    "salaryExpectation": "",
+    "noticePeriod": "",
+    "startDate": "",
+    "additionalNotes": ""
+  }
+}
