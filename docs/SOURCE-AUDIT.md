@@ -11,8 +11,11 @@ The separated tree was verified again on July 30, 2026:
   Tectonic.
 - `npm.cmd run studio:test` in the source Career Ops project passed every
   Resume Studio test.
-- `npm.cmd test` in the source AutoApply project passed 41 of 42 tests. The
-  only failure was the automatic endpoint integration test described below.
+- `node --check src/controller/server.js` in the source AutoApply project
+  passed, confirming that the edited controller is syntactically valid.
+- `npm.cmd test` in the source AutoApply project passed 40 of 42 tests. The
+  two failures were the automatic endpoint and package integration tests
+  described below.
 
 These checks verify the local toolkit and document workflow. They do not turn
 the external Codex Chrome capability into repository source code, and they do
@@ -38,16 +41,26 @@ than the original application, its personal data, or its dependency tree.
 
 ### AutoApply modules
 
-The source suite was run again during separation. 41 of 42 tests passed. Those
+The source suite was run again during separation. 40 of 42 tests passed. Those
 tests prove local mock flows for Greenhouse and Ashby, field discovery and
 filling, uploads, confirmed-submission auditing, deduplication, posting-age and
 repost policy, internship and transcript policy, prompt-injection detection,
 answer workspaces, and local credential metadata.
 
-The remaining integration test failed because the edited source controller did
-not become healthy. Inspection showed that its HTTP listener was nested inside
-the request callback, so the server never began listening. That controller was
-not used for the live applications and was not copied into this template.
+The automatic endpoint integration test failed because the edited source
+controller did not become healthy. Inspection showed that its server creation
+and listener are nested inside `makeObservation()`, so `startController()`
+returns without starting the HTTP server. Most of the observation pipeline is
+also nested under the CAPTCHA-detected branch, and that branch references an
+undefined `automationReady` value. The controller passes a syntax check but is
+not operational.
+
+The package integration test failed while counting generated PDF pages because
+the installed `pdf-parse` module no longer matched the call site:
+`TypeError: pdfParse is not a function`. The separate Resume Studio test suite
+still passed every test. Neither source integration failure affects this
+template because the broken controller and the source dependency tree were not
+copied.
 
 ## Not used or not proven
 
@@ -62,9 +75,13 @@ basis of this template.
 ### AI CAPTCHA bypass
 
 The AutoApply test named `captcha_tools` only verifies creation of a local
-challenge metadata bundle without AI solver modules. The `ai-captcha-bypass`
-folder was not wired into the working application controller, and no live
-CAPTCHA-solving path was proven. It is intentionally excluded.
+challenge metadata bundle without AI solver modules. In the current edited
+controller, `captureCaptchaBundle` is imported but never called. The protocol
+accepts a `captcha` action name, but the controller has no action endpoint that
+executes it. The `ai-captcha-bypass` folder remains a separate demo project and
+is not wired into the controller, Codex Chrome control, or the confirmed live
+application workflow. No live CAPTCHA-solving path is active or proven, so it
+is intentionally excluded.
 
 ### Fully unattended guarantee
 
