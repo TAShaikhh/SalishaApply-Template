@@ -2,6 +2,22 @@
 
 This template was separated from `TAShaikhh/SalishaApply` on July 30, 2026.
 
+## Verification snapshot
+
+The separated tree was verified again on July 30, 2026:
+
+- `npm.cmd test` in this repository passed all 6 tests.
+- The example resume and cover-letter LaTeX sources both compiled to PDF with
+  Tectonic.
+- `npm.cmd run studio:test` in the source Career Ops project passed every
+  Resume Studio test.
+- `npm.cmd test` in the source AutoApply project passed 41 of 42 tests. The
+  only failure was the automatic endpoint integration test described below.
+
+These checks verify the local toolkit and document workflow. They do not turn
+the external Codex Chrome capability into repository source code, and they do
+not prove CAPTCHA solving or universal unattended submission.
+
 ## Proven components
 
 ### Codex plus Chrome
