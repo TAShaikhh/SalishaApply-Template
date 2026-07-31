@@ -531,20 +531,29 @@ export async function diagnoseEnvironment(root, overrides = {}) {
       : candidate.errors.join("; ") || "run npm run init and complete candidate/"
   });
 
-  const latexEngine = overrides.latexEngine
-    || findExecutable("tectonic")
-    || findExecutable("pdflatex");
+  let latexEngine = overrides.latexEngine || null;
+  let latexDetail = "";
+  if (!latexEngine && process.env.LATEX_ENGINE) {
+    try {
+      latexEngine = resolveLatexEngine(process.env.LATEX_ENGINE);
+    } catch (error) {
+      latexDetail = error.message;
+    }
+  }
+  if (!latexEngine) {
+    latexEngine = findExecutable("tectonic") || findExecutable("pdflatex");
+  }
   checks.push({
     id: "latex",
     name: "LaTeX",
     status: latexEngine ? "pass" : "fail",
-    detail: latexEngine || "install Tectonic or pdflatex"
+    detail: latexEngine || latexDetail || "install Tectonic or pdflatex"
   });
 
-  const skillPath = join(root, ".codex", "skills", "apply-jobs-end-to-end", "SKILL.md");
+  const skillPath = join(root, ".agents", "skills", "apply-jobs-end-to-end", "SKILL.md");
   const workflowPath = join(
     root,
-    ".codex",
+    ".agents",
     "skills",
     "apply-jobs-end-to-end",
     "references",
@@ -556,7 +565,7 @@ export async function diagnoseEnvironment(root, overrides = {}) {
     name: "Codex workflow",
     status: skillComplete ? "pass" : "fail",
     detail: skillComplete
-      ? ".codex skill and operational workflow are present"
+      ? ".agents skill and operational workflow are present"
       : "the repository-local Codex skill is incomplete"
   });
 
@@ -578,7 +587,7 @@ export async function diagnoseEnvironment(root, overrides = {}) {
     id: "chrome",
     name: "Chrome control",
     status: "external",
-    detail: "provided by Codex Desktop; verify Chrome control and signed-in sessions in the app"
+    detail: "provided by the ChatGPT desktop app; verify the Chrome plugin and signed-in sessions in the app"
   });
 
   return {

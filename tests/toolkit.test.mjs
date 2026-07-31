@@ -224,17 +224,17 @@ test("environment doctor distinguishes local prerequisites from external Chrome 
   await initializeCandidate(testRoot);
   await completeCandidate(testRoot);
   await mkdir(
-    join(testRoot, ".codex", "skills", "apply-jobs-end-to-end", "references"),
+    join(testRoot, ".agents", "skills", "apply-jobs-end-to-end", "references"),
     { recursive: true }
   );
   await writeFile(
-    join(testRoot, ".codex", "skills", "apply-jobs-end-to-end", "SKILL.md"),
+    join(testRoot, ".agents", "skills", "apply-jobs-end-to-end", "SKILL.md"),
     "# Test skill\n"
   );
   await writeFile(
     join(
       testRoot,
-      ".codex",
+      ".agents",
       "skills",
       "apply-jobs-end-to-end",
       "references",
@@ -243,12 +243,24 @@ test("environment doctor distinguishes local prerequisites from external Chrome 
     "# Test workflow\n"
   );
   await writeFile(join(testRoot, ".gitignore"), "candidate/\nruntime/\n");
+  const latexEngine = join(testRoot, process.platform === "win32" ? "tectonic.exe" : "tectonic");
+  await writeFile(latexEngine, "");
+  const previousLatexEngine = process.env.LATEX_ENGINE;
+  process.env.LATEX_ENGINE = latexEngine;
 
-  const result = await diagnoseEnvironment(testRoot, {
-    nodeVersion: "22.11.0",
-    latexEngine: "C:\\tools\\tectonic.exe",
-    findExecutable: () => null
-  });
+  let result;
+  try {
+    result = await diagnoseEnvironment(testRoot, {
+      nodeVersion: "22.11.0",
+      findExecutable: () => null
+    });
+  } finally {
+    if (previousLatexEngine === undefined) {
+      delete process.env.LATEX_ENGINE;
+    } else {
+      process.env.LATEX_ENGINE = previousLatexEngine;
+    }
+  }
 
   assert.equal(result.ok, true);
   assert.equal(result.checks.find((check) => check.id === "candidate").status, "pass");

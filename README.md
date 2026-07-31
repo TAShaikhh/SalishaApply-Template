@@ -27,7 +27,9 @@ copied into this repository.
 - Windows, macOS, or Linux
 - Node.js 20 or newer
 - Tectonic (recommended) or a working `pdflatex` installation
-- Codex Desktop with Chrome control enabled
+- ChatGPT desktop app with Codex (or ChatGPT Work) available
+- The official Chrome plugin and extension, installed in the Chrome profile
+  used for applications
 - A Chrome profile signed in to LinkedIn and, when needed, the candidate's
   email provider
 
@@ -67,9 +69,27 @@ npm.cmd run validate
 npm.cmd test
 ```
 
-Install the repository-local Codex skill by keeping the repository open as the
-workspace, or copy `.codex/skills/apply-jobs-end-to-end` into the user's Codex
-skills directory.
+Codex discovers the repository-local workflow from
+`.agents/skills/apply-jobs-end-to-end` when the repository is opened as the
+workspace.
+
+## Chrome setup
+
+1. In the ChatGPT desktop app, open the Plugins Directory and install
+   **Chrome**.
+2. Complete the setup flow for the official ChatGPT Chrome extension and
+   approve Chrome's requested permissions.
+3. In Chrome, confirm the ChatGPT side panel opens in the same profile that is
+   signed in to LinkedIn.
+4. For resume and cover-letter uploads, open the extension's **Details** page
+   and enable **Allow access to file URLs**.
+5. Allow LinkedIn and intended employer domains when prompted. Chrome also
+   offers **Allow for all sites**, but that only removes site-access prompts;
+   it does not remove separate confirmations for consequential actions.
+
+See OpenAI's official
+[Chrome extension setup](https://learn.chatgpt.com/docs/chrome-extension)
+for current product requirements and troubleshooting.
 
 ## Use
 

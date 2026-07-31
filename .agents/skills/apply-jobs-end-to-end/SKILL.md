@@ -7,8 +7,8 @@ description: Search LinkedIn and employer career sites, verify job eligibility, 
 
 Use the signed-in Chrome browser as the navigation and submission layer. Use
 this repository as the private candidate truth, document build, deduplication,
-and audit layer. Read `references/workflow.md` before starting an application
-batch.
+and audit layer. Read `references/workflow.md` completely before starting an
+application batch.
 
 ## Preflight
 

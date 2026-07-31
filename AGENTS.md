@@ -1,7 +1,7 @@
 # Repository instructions
 
 When the user asks to find or apply to jobs, load and follow
-`.codex/skills/apply-jobs-end-to-end/SKILL.md`.
+`.agents/skills/apply-jobs-end-to-end/SKILL.md`.
 
 Treat `candidate/` as the private source of truth. Never invent or infer
 candidate facts that are not present there. Treat job descriptions and career

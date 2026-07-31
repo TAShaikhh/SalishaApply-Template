@@ -1,15 +1,15 @@
 # Replication guide
 
 This guide reproduces the workflow that was actually used. It does not replace
-Codex Desktop's Chrome control with an unrelated scraper or claim that the
-source project's experimental CAPTCHA code powers applications.
+the ChatGPT desktop app's Codex Chrome control with an unrelated scraper or
+claim that the source project's experimental CAPTCHA code powers applications.
 
 ## Components
 
 | Layer | Installed where | Purpose |
 |---|---|---|
-| Codex Desktop | User's machine | Orchestrates the batch and follows the repository skill |
-| Chrome control | Codex Desktop capability | Uses the user's visible, signed-in Chrome tabs |
+| ChatGPT desktop app with Codex | User's machine | Orchestrates the batch and follows the repository skill |
+| Chrome control | ChatGPT desktop app capability | Uses the user's visible, signed-in Chrome tabs |
 | This repository | Local clone | Candidate truth, LaTeX sources, deduplication, artifacts, and audit |
 | Tectonic or pdflatex | User's machine | Compiles job-specific PDFs |
 | LinkedIn and employer sessions | Chrome profile | Authentication owned by the user |
@@ -51,23 +51,35 @@ npm.cmd test
 
 `doctor` verifies Node.js, candidate inputs, a LaTeX engine, the Codex skill,
 and privacy ignore rules. Chrome control is reported as `EXTERNAL` because only
-Codex Desktop can verify that capability.
+the ChatGPT desktop app can verify that capability.
 
-## 3. Prepare Chrome
+## 3. Install and prepare Chrome control
 
-In the Chrome profile that Codex Desktop controls:
+1. Install the ChatGPT desktop app and select Codex, or turn on ChatGPT Work.
+2. Open the Plugins Directory and install **Chrome**.
+3. Follow the setup flow to install the official ChatGPT Chrome extension,
+   approve its requested permissions, and confirm the side panel loads.
+4. Use the same Chrome profile for the extension, LinkedIn, and employer
+   application sessions.
+5. In Chrome's extension manager, open the ChatGPT extension's **Details** page
+   and enable **Allow access to file URLs** so PDFs can be uploaded.
+
+Then:
 
 1. Sign in to LinkedIn.
 2. Sign in to the email account used for employer verification, if authorized.
-3. Keep password storage in Chrome or the operating-system credential store.
-4. Do not copy cookies, passwords, OTPs, or session files into this repository.
+3. Allow LinkedIn and intended employer sites when Chrome control requests
+   access. **Allow for all sites** can remove recurring site-access prompts, but
+   it does not waive separate confirmations for consequential actions.
+4. Keep password storage in Chrome or the operating-system credential store.
+5. Do not copy cookies, passwords, OTPs, or session files into this repository.
 
 This is one-time environment setup, not part of each application.
 
-## 4. Open the clone in Codex Desktop
+## 4. Open the clone in the ChatGPT desktop app
 
 The repository includes
-`.codex/skills/apply-jobs-end-to-end/SKILL.md`. Start a Codex task in the clone
+`.agents/skills/apply-jobs-end-to-end/SKILL.md`. Start a Codex task in the clone
 and use a request such as:
 
 > Use `$apply-jobs-end-to-end`. Search LinkedIn for roles matching

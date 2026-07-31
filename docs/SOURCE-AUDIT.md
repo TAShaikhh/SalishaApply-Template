@@ -4,11 +4,17 @@ This template was separated from `TAShaikhh/SalishaApply` on July 30, 2026.
 
 ## Verification snapshot
 
-The separated tree was verified again on July 30, 2026:
+The separated tree was verified again on July 31, 2026:
 
 - `npm.cmd test` in this repository passed all 6 tests.
+- The repository-scoped workflow passed the skill validator from its current
+  `.agents/skills` discovery path.
+- `npm.cmd run doctor` recognized an absolute `LATEX_ENGINE` path; it correctly
+  rejected the untouched private candidate workspace because it still
+  contained placeholders.
 - The example resume and cover-letter LaTeX sources both compiled to PDF with
-  Tectonic.
+  Tectonic. Each rendered as a single letter-size page without clipping,
+  overlap, or broken glyphs.
 - `npm.cmd run studio:test` in the source Career Ops project passed every
   Resume Studio test.
 - `node --check src/controller/server.js` in the source AutoApply project

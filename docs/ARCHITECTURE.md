@@ -25,6 +25,10 @@ Codex is the orchestration and browser layer. This repository is the local
 candidate-data, document-build, deduplication, and audit layer. Chrome owns the
 authenticated session.
 
+The repository-scoped workflow lives under `.agents/skills`, the current Codex
+discovery location for project skills. `AGENTS.md` points Codex to that
+workflow for application tasks.
+
 ## Why there is no universal LinkedIn scraper here
 
 The working application runs through the signed-in Chrome session visible to
